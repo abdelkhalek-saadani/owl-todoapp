@@ -1,8 +1,5 @@
 .task-list {
-    width: 300px;
-    margin: 50px auto;
-    background: aliceblue;
-    padding: 10px;
+    margin-top: 8px;
 }
 
 .task {
@@ -12,4 +9,17 @@
 
 .task.done {
     opacity: 0.7;
-  }
+}
+
+.todo-app {
+    width: 300px;
+    margin: 50px auto;
+    background: aliceblue;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+.todo-app>input {
+    display: block;
+    margin: auto;
+}

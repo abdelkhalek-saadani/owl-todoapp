@@ -1,4 +1,4 @@
-const { Component, mount, xml } = owl;
+const { Component, mount, xml, useState} = owl;
 
 // -------------------------------------------------------------------------
 // Task Component
@@ -19,13 +19,29 @@ class Task extends Component {
 // -------------------------------------------------------------------------
 class Root extends Component {
   static template = xml/* xml */ `
+    <div class="todo-app">
+      <input placeholder="Add Task" t-on-keyup="addTask" />
       <div class="task-list" >
           <t t-foreach="tasks" t-as="task" t-key="task.id">
               <Task task="task" task_index="task_index" />
           </t>
-      </div>`;
+      </div>
+    </div>`;
   static components = { Task };
-  tasks = [
+
+  addTask(ev) {
+    if (ev.keyCode === 13) {
+      const text = ev.target.value.trim();
+      console.log("text entered ",text);
+      ev.target.value = "";
+      this.tasks.push({
+        id: this.tasks.length + 1,
+        text: text,
+        isCompleted: false,
+      });
+    }
+  }
+  tasks = useState([
     {
       id: 1,
       text: "buy milk",
@@ -36,7 +52,7 @@ class Root extends Component {
       text: "clean house",
       isCompleted: false,
     },
-  ];
+  ]);
 }
 
 mount(Root, document.body, { dev: true });
